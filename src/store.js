@@ -4,17 +4,27 @@ import { createStore } from 'vuex'
 export const store = createStore({
   state() {
     return {
-      items: ["red", "yellow", "green", "blue"],
-      currentIndex: 0,
-      upcomingIndex: 0,
+      // any object in the below array represents a prop that is passed from MobileSwiper to MobilePage
+      pages: [{ title: "Settings", routeName: "SettingsView", color: "red" },
+      {
+        title: "Conversations",
+        routeName: "ConversationsView",
+        color: "yellow",
+      },
+      { title: "Chat", routeName: "ChatView", color: "green" },
+      { title: "Details", routeName: "UserDetailsView", color: "blue" }],
+      currentIndex: 1,
       pagesRendered: ["red", "yellow", "green"],
-      swiperInfiniteLoop: false,
+      isInfiniteLoop: false,
       prefersReducedMotion: false,
+      upcomingIndex: 0,
+      currentRoute: null,
+      mobile: window.screen.width <= 749,
     }
   },
   mutations: {
     toggleInfiniteSwipe(state) {
-      return state.swiperInfiniteLoop = !state.swiperInfiniteLoop
+      return state.isInfiniteLoop = !state.isInfiniteLoop
     },
     toggleReducedMotion(state) {
       return state.prefersReducedMotion = !state.prefersReducedMotion
